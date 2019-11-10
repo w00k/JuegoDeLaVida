@@ -46,10 +46,14 @@ def buscarVida(M1, posicionX, posicionY ):
     buscador.append(estaVivo(M1, posicionX, posicionY+1))
     buscador.append(estaVivo(M1, posicionX+1, posicionY+1))
 
+    #suma las posiciones con valores vivos, osea 1
     for valor in buscador:
         if valor == 1.0:
             valores = valores + 1
 
+    #logica,
+    # celula viva, con 2 o 3 se mantiene viva
+    # celula muerta, con 3 celulas vivas adyacentes vive
     if M1[posicionX][posicionY] == 1 and (2 == valores or valores == 3):
         valores = 1
     elif M1[posicionX][posicionY] == 0 and valores == 3:
@@ -59,18 +63,17 @@ def buscarVida(M1, posicionX, posicionY ):
     return valores
 
 def juegoVida(mat):
-    #largo = mat.shape
-    #print "@@@@@@@@@@@@ ===============> ", largo[1], largo[0]
-    #recorre la matriz y en el valor value se obtiene el valor
+    #se hace una copia de la matriz, para guardar los resultados
     matAux = mat.copy()
+    #recorre la matriz y en el valor value se obtiene el valor
     for (x,y), valor in numpy.ndenumerate(mat):
         matAux[x][y] = buscarVida(mat, x, y)
     return matAux
 
 # ingreso del tamano de la matriz
-N = 3
+N = 5
 #ingreso de la cantidad de celulas
-numCel = 5
+numCel = 9
 M1=generarMatriz(N,numCel)
 print(M1.astype(int))
 print("")
