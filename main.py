@@ -62,12 +62,20 @@ def buscarVida(M1, posicionX, posicionY ):
         valores = 0
     return valores
 
-def juegoVida(mat):
+#se ejecuta un ciclo del juego de la vida
+def juegoVidaEjecucion(mat):
     #se hace una copia de la matriz, para guardar los resultados
     matAux = mat.copy()
     #recorre la matriz y en el valor value se obtiene el valor
     for (x,y), valor in numpy.ndenumerate(mat):
         matAux[x][y] = buscarVida(mat, x, y)
+    return matAux
+
+#se ejecuta el ciclo de la vida ... por 1000 ciclos
+def juegoVida(mat):
+    matAux = mat.copy()
+    for i in range(1000):
+        matAux = juegoVidaEjecucion(matAux).copy()
     return matAux
 
 # ingreso del tamano de la matriz
